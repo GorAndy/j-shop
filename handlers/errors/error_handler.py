@@ -24,6 +24,7 @@ async def errors_handler(update, exception):
     if isinstance(exception, MessageNotModified):
         logging.debug('Message is not modified')
         return True
+
     if isinstance(exception, MessageCantBeDeleted):
         logging.debug('Message cant be deleted')
         return True
@@ -47,10 +48,13 @@ async def errors_handler(update, exception):
     if isinstance(exception, TelegramAPIError):
         logging.exception(f'TelegramAPIError: {exception} \nUpdate: {update}')
         return True
+
     if isinstance(exception, RetryAfter):
         logging.exception(f'RetryAfter: {exception} \nUpdate: {update}')
         return True
+
     if isinstance(exception, CantParseEntities):
         logging.exception(f'CantParseEntities: {exception} \nUpdate: {update}')
         return True
+
     logging.exception(f'Update: {update} \n{exception}')
