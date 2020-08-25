@@ -76,6 +76,37 @@ class Database:
         self.execute("DELETE FROM Users WHERE TRUE", commit=True)
 
 
+class ItemsBase(Database):
+
+    def create_table_items(self):
+        sql = """
+        CREATE TABLE Items (
+        id integer NOT NULL,
+        name text(255) NOT NULL,
+        description text(255),
+        price real,
+        photo text(255),
+        PRIMARY KEY (id)
+        );
+        """
+        self.execute(sql, commit=True)
+
+    def add_new_item(self, id: int, name: str, description: str = None, price: float = 0.0, photo: str = None):
+        sql = """
+        INSERT INTO Items (id, name, description, price, photo) VALUES (?, ?, ?, ?, ?)
+        """
+        self.execute(sql, parameters=(id, name, description, price, photo), commit=True)
+
+    def select_item(self, **kwargs):
+        sql = "SELECT * FROM Items WHERE "
+        sql, parameters = self.format_args(sql, kwargs)
+        return self.execute(sql, parameters=parameters, fetchone=True)
+
+    def select_all_items(self):
+        sql = "SELECT * FROM Items"
+        return self.execute(sql, fetchall=True)
+
+
 def logger(statement):
     print(f"""
     ---------------------------------------------

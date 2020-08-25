@@ -75,7 +75,7 @@ async def add_photo_item(message: Message, state: FSMContext):
             Цена товара:             <b>{item_price} руб </b>"""
     await state.finish()
     await bot.send_photo(message.chat.id, photo=item_photo, caption=caption, reply_markup=inline_add_to_db())
-    return print(data)
+    return data
 
 
 
