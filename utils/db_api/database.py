@@ -88,6 +88,7 @@ class DBCommands:
         items = await Item.query.gino.all()
         return items
 
+
 async def create_db():
     await db.set_bind(f"postgresql://{PGUSER}:{PGPASS}@{host}/gino")
 
