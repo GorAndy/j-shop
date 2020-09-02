@@ -5,7 +5,7 @@ from aiogram import types
 from data.config import I18N_DOMAIN, LOCALES_DIR
 from utils.db_api.database import DBCommands
 
-db = DBCommands
+db = DBCommands()
 
 
 async def get_lang(user_id):

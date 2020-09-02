@@ -15,7 +15,7 @@ DBNAME = os.getenv('DBNAME')
 LIQPAY_TOKEN = os.getenv('LIQPAY_TOKEN')
 
 I18N_DOMAIN = 'testbot'
-BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).parent.parent
 LOCALES_DIR = BASE_DIR / 'locales'
 
 

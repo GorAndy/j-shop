@@ -30,6 +30,9 @@ class Item(db.Model):
     photo = Column(String(250))
     price = Column(Integer)
 
+    def __repr__(self):
+        return "<Item(id='{}', name='{}', price='{}')>".format(self.id, self.name, self.price)
+
 
 class Purchase(db.Model):
     __tablename__ = "purchases"
