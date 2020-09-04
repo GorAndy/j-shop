@@ -6,7 +6,8 @@ load_dotenv()
 
 BOT_TOKEN = str(os.getenv("BOT_TOKEN"))
 
-admins = [admin.strip() for admin in os.getenv('ADMINS_ID').split(',')]
+# admins = [admin.strip() for admin in os.getenv('ADMINS_ID').split(',')]
+admins = os.getenv("ADMINS_ID")
 
 host = os.getenv('PGHOST')
 PGUSER = os.getenv('PGUSER')

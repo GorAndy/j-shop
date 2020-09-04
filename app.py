@@ -2,17 +2,28 @@ from aiogram import executor
 
 from data.config import admins
 from loader import bot
+from utils.db_api.database import create_db
 
 
 async def on_shutdown(dp):
-    for admin in admins:
-        await bot.send_message(admin, "Бот остановлен")
+
+    await bot.send_message(admins, "Бот остановлен")
     await bot.close()
 
 
 async def on_startup(dp):
-    for admin in admins:
-        await bot.send_message(admin, "Бот запущен")
+    await create_db()
+    await bot.send_message(admins, "Бот запущен")
+
+# async def on_shutdown(dp):
+#     for admin in admins:
+#         await bot.send_message(admin, "Бот остановлен")
+#     await bot.close()
+#
+#
+# async def on_startup(dp):
+#     for admin in admins:
+#         await bot.send_message(admin, "Бот запущен")
 
 
 if __name__ == '__main__':

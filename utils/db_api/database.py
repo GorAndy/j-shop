@@ -60,7 +60,7 @@ class DBCommands:
         if old_user:
             return old_user
         new_user = User()
-        new_user.username = user.id
+        new_user.user_id = user.id
         new_user.username = user.username
         new_user.full_name = user.full_name
         if referral:
@@ -80,7 +80,8 @@ class DBCommands:
     async def check_referrals(self):
         bot = Bot.get_current()
         user_id = types.User.get_current().id
-        user = await self.get_user(user_id)
+
+        user = await User.query.where(User.user_id == user_id).gino.first()
         referrals = await User.query.where(User.referral == user.id).gino.all()
         return ", ".join([
             f"{num + 1}. " + (await bot.get_chat(referral.user_id)).get_mention(as_html=True)

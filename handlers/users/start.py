@@ -24,6 +24,7 @@ async def register_user(message: Message):
     referral = message.get_args()
     user = await db.add_new_user(referral=referral)
     id = user.id
+
     count_users = await db.count_users()
 
     language_markup = InlineKeyboardMarkup(
@@ -45,7 +46,7 @@ async def register_user(message: Message):
         "Посмотреть товары: /items").format(count_users=count_users,
                                             bot_link=bot_link
                                             )
-    if message.from_user.id in admins:
+    if str(chat_id) in admins:
         text += _("/n"
                   "Добавить новый товар: /add_item")
     await bot.send_message(chat_id, text, reply_markup=language_markup)
