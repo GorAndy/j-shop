@@ -83,7 +83,7 @@ class DBCommands:
         user = await self.get_user(user_id)
         referrals = await User.query.where(User.referral == user.id).gino.all()
         return ", ".join([
-            f"{num + 1}. " + (await bot.get_chat((referral.user_id))).get_mention(as_html=True)
+            f"{num + 1}. " + (await bot.get_chat(referral.user_id)).get_mention(as_html=True)
             for num, referral in enumerate(referrals)
         ])
 
