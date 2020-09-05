@@ -19,7 +19,7 @@ async def cancel(message: Message, state: FSMContext):
 
 @dp.message_handler(user_id=admins, commands=['add_item'])
 async def add_item(message: Message):
-    await message.answer(_("Введите название товара или нажмите  /cancel"))
+    await message.answer(_("Введите название товара или нажмите  /cancel"), reply_markup=types.ReplyKeyboardRemove())
     await NewItem.Name.set()
 
 
@@ -44,8 +44,10 @@ async def add_photo(message: Message, state: FSMContext):
     item.photo = photo
 
     await message.answer_photo(photo=photo, caption=_("Название: {name}\n"
-                                                      "Пришлите мне цену товара в копейках или /cancel"))
+                                                      "Пришлите мне цену товара в копейках или /cancel").format(
+        name=item.name))
     await NewItem.Price.set()
+    await state.update_data(item=item)
 
 
 @dp.message_handler(user_id=admins, state=NewItem.Price)

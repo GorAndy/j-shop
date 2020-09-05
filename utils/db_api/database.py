@@ -50,7 +50,10 @@ class Purchase(db.Model):
 
 
 class DBCommands:
+    db.gino: GinoSchemaVisitor
+
     async def get_user(self, user_id):
+
         user = await User.query.where(User.user_id == user_id).gino.first()
         return user
 
@@ -97,5 +100,5 @@ async def create_db():
     await db.set_bind(f"postgresql://{PGUSER}:{PGPASS}@{host}/gino")
 
     db.gino: GinoSchemaVisitor
-    await db.gino.drop_all()
+    # await db.gino.drop_all()
     await db.gino.create_all()

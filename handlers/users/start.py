@@ -43,12 +43,11 @@ async def register_user(message: Message):
         "/n"
         "Ваша реферальная ссылка {bot_link}\n"
         "Проверить рефералов можно командой /referrals\n"
-        "Посмотреть товары: /items").format(count_users=count_users,
+        "Посмотреть товары: /items\n").format(count_users=count_users,
                                             bot_link=bot_link
                                             )
     if str(chat_id) in admins:
-        text += _("/n"
-                  "Добавить новый товар: /add_item")
+        text += _("Добавить новый товар: /add_item")
     await bot.send_message(chat_id, text, reply_markup=language_markup)
 
 
